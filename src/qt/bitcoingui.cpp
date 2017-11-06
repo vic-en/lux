@@ -38,6 +38,7 @@
 #include "messagepage.h"
 #include "blockbrowser.h"
 #include "multisigdialog.h"
+#include "profitexplorerpage.h"
 
 #ifdef Q_OS_MAC
 #include "macdockiconhandler.h"
@@ -129,7 +130,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     transactionView = new TransactionView(this);
     vbox->addWidget(transactionView);
     transactionsPage->setLayout(vbox);
-
+    profitExplorerPage = new ProfitExplorerPage(this);
     blockBrowser = new BlockBrowser(this);
 
     addressBookPage = new AddressBookPage(AddressBookPage::ForEditing, AddressBookPage::SendingTab);
@@ -162,7 +163,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     centralStackedWidget->addWidget(clientcontrolPage);
     //TradingAction->setChecked(true);
   //  centralStackedWidget->addWidget(tradingDialogPage);
-
+    centralStackedWidget->addWidget(profitExplorerPage);
     QWidget *centralWidget = new QWidget();
     QVBoxLayout *centralLayout = new QVBoxLayout(centralWidget);
     centralLayout->setContentsMargins(0,0,0,0);
@@ -340,6 +341,11 @@ void BitcoinGUI::createActions()
     TradingAction ->setShortcut(QKeySequence(Qt::ALT + Qt::Key_8));
     TradingAction->setProperty("objectName","TradingAction");
     tabGroup->addAction(TradingAction);*/
+    
+    profitExplorerPageAction = new QAction(QIcon(":/icons/profitexplorer"), tr("&Profit Explorer"), this);
+    profitExplorerPageAction->setToolTip(tr("Staking explorer"));
+    profitExplorerPageAction->setCheckable(true);
+    tabGroup->addAction(profitExplorerPageAction);
 
    // connect(TradingAction, SIGNAL(triggered()), this, SLOT(gotoTradingPage()));
     connect(blockAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
@@ -361,7 +367,8 @@ void BitcoinGUI::createActions()
     connect(messageAction, SIGNAL(triggered()), this, SLOT(gotoMessagePage()));
     connect(clientcontrolAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(clientcontrolAction, SIGNAL(triggered()), this, SLOT(gotoClientControlPage()));
-
+    connect(profitExplorerPageAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    connect(profitExplorerPageAction, SIGNAL(triggered()), this, SLOT(gotoProfitExplorerPage()));
     connect(multisigAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(multisigAction, SIGNAL(triggered()), this, SLOT(gotoMultisigPage()));
 
@@ -481,7 +488,7 @@ void BitcoinGUI::createToolBars()
     toolbar->addAction(blockAction);
     //toolbar->addAction(TradingAction);
     netLabel = new QLabel();
-
+    toolbar->addAction(profitExplorerPageAction);
     QWidget *spacer = makeToolBarSpacer();
     netLabel->setObjectName("netLabel");
     netLabel->setStyleSheet("#netLabel { color: #efefef; }");
@@ -1028,6 +1035,15 @@ void BitcoinGUI::gotoMessagePage()
     connect(exportAction, SIGNAL(triggered()), messagePage, SLOT(exportClicked()));
 }
 
+void BitcoinGUI::gotoProfitExplorerPage()
+{
+    profitExplorerPageAction->setChecked(true);
+    centralStackedWidget->setCurrentWidget(profitExplorerPage);
+    profitExplorerPage->loadStakeChart(true);
+
+    exportAction->setEnabled(true);
+    disconnect(exportAction, SIGNAL(triggered()), 0, 0);
+}
 void BitcoinGUI::dragEnterEvent(QDragEnterEvent *event)
 {
     // Accept only URIs

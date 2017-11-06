@@ -55,6 +55,7 @@ uint256 nBestInvalidTrust = 0;
 uint256 hashBestChain = 0;
 CBlockIndex* pindexBest = NULL; // Should be NULL
 int64_t nTimeBestReceived = 0;
+int64_t nPreferredBlockSize = 2 * COIN;
 bool fImporting = false;
 bool fReindex = false;
 bool fAddrIndex = false;

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QSystemTrayIcon>
+#include <QLabel>
 
 #include <stdint.h>
 
@@ -22,6 +23,7 @@ class MessagePage;
 class MessageModel;
 class BlockBrowser;
 class MultisigDialog;
+class ProfitExplorerPage;
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -29,6 +31,7 @@ class QModelIndex;
 class QProgressBar;
 class QStackedWidget;
 class QScrollArea;
+class QUrl;
 QT_END_NAMESPACE
 
 /**
@@ -82,6 +85,7 @@ private:
     MessagePage *messagePage;
     BlockBrowser *blockBrowser;
     MultisigDialog *multisigPage;
+    ProfitExplorerPage *profitExplorerPage;
 
    //----------QLable---------//
 
@@ -124,6 +128,7 @@ private:
     Notificator *notificator;
     TransactionView *transactionView;
     RPCConsole *rpcConsole;
+    QAction *profitExplorerPageAction;
 
     QMovie *syncIconMovie;
     /** Keep track of previous number of blocks, to detect progress */
@@ -191,7 +196,8 @@ private slots:
     void gotoMultisigPage();
     /** Switch to masternodemanagerpage */
     void gotoMasternodeManagerPage();
-
+    /** Switch to the ProfitExplorer page */
+    void gotoProfitExplorerPage();
     /** Show Sign/Verify Message dialog and switch to sign message tab */
     void gotoSignMessageTab(QString addr = "");
     /** Show Sign/Verify Message dialog and switch to verify message tab */

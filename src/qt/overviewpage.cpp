@@ -20,6 +20,7 @@
 #include <QTimer>
 #include <QDebug>
 #include <QScroller>
+#include <QDesktopServices>
 
 #define DECORATION_SIZE 64
 #define NUM_ITEMS 6
@@ -159,10 +160,11 @@ OverviewPage::OverviewPage(QWidget *parent) :
         QFont label = font();
         ui->diffplot->xAxis->setLabelFont(label);
         ui->diffplot->yAxis->setLabelFont(label);
+       
     }
     else
     {
-        ui->diffplot->setVisible(false);
+      //  ui->diffplot->setVisible(false);
     }
     showingDarkSendMessage = 0;
     darksendActionCheck = 0;
@@ -204,7 +206,7 @@ OverviewPage::OverviewPage(QWidget *parent) :
 void OverviewPage::updatePlot(int count)
 {
     // Double Check to make sure we don't try to update the plot when it is disabled
-    if(!GetBoolArg("-chart", true)) { return; }
+    if(!GetBoolArg("-chart", false)) { return; }
 
     // if(fDebug) { printf("Plot: Getting Ready: pidnexBest: %p\n", pindexBest); }
 

@@ -3423,7 +3423,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 vwtxPrev.push_back(pcoin.first);
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
 
-                if(nCredit > 100 * COIN)
+                if (GetWeight(pindexBest->GetBlockTime(), (int64_t)txNew.nTime) < GetStakeSplitAge || nCredit > nPreferredBlockSize)
                     txNew.vout.push_back(CTxOut(0, scriptPubKeyOut)); //split stake
                 LogPrint("coinstake", "CreateCoinStake : added kernel type=%d\n", whichType);
                 fKernelFound = true;
@@ -3506,7 +3506,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         //spork
         if(!masternodePayments.GetBlockPayee(pindexPrev->nHeight+1, payee)){
             int winningNode = GetCurrentMasterNode(1);
-                if(winningNode >= 0){
+                if(winningNode){
                     payee =GetScriptForDestination(vecMasternodes[winningNode].pubkey.GetID());
                 } else {
                     LogPrintf("CreateCoinStake: Failed to detect masternode to pay\n");

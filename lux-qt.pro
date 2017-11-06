@@ -187,7 +187,7 @@ contains(USE_O3, 1) {
     QMAKE_CFLAGS += -msse2
 }
 
-QMAKE_CXXFLAGS_WARN_ON = -fdiagnostics-show-option -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter -Wstack-protector -Wunused-function -Wunused-variable -fpermissive -Wconversion-null -Wmaybe-uninitialized
+QMAKE_CXXFLAGS_WARN_ON = -fdiagnostics-show-option -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter -Wstack-protector
 
 # Input
 DEPENDPATH += src src/json src/qt
@@ -322,7 +322,8 @@ HEADERS += src/qt/bitcoingui.h \
     src/obj/phi1612/sph_jh.h \
     src/obj/phi1612/sph_gost.h \
     src/obj/phi1612/sph_echo.h \
-    src/txdb-leveldb.h
+    src/txdb-leveldb.h \
+    src/qt/profitexplorerpage.h
 
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
@@ -431,7 +432,8 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/sendmessagesentry.cpp \
     src/qt/qvalidatedtextedit.cpp \
     src/qt/plugins/mrichtexteditor/mrichtextedit.cpp \
-    src/rpcsmessage.cpp
+    src/rpcsmessage.cpp \
+    src/qt/profitexplorerpage.cpp
 
 
 RESOURCES += \
@@ -462,8 +464,8 @@ FORMS += \
     src/qt/plugins/mrichtexteditor/mrichtextedit.ui \
     src/qt/forms/multisigaddressentry.ui \
     src/qt/forms/multisiginputentry.ui \
-    src/qt/forms/multisigdialog.ui
-
+    src/qt/forms/multisigdialog.ui \
+    src/qt/forms/profitexplorerpage.ui
 contains(USE_QRCODE, 1) {
 HEADERS += src/qt/qrcodedialog.h
 SOURCES += src/qt/qrcodedialog.cpp
