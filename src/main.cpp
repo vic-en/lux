@@ -1138,35 +1138,39 @@ int64_t GetProofOfWorkReward(int64_t nFees, int nHeight)
 
     if(pindexBest->nHeight == 1)
     {
-        nSubsidy = 3000000 * COIN;                     // Initilised static pre-mine
+        nSubsidy = 6000000 * COIN;                     // Initilised static pre-mine
     }
         else if(pindexBest->nHeight < 500)             // First halving - Activated instamine protection 
     {
-        nSubsidy = 1 * COIN;   // ~500
+        nSubsidy = 2 * COIN;   // 
     }
-        else if(pindexBest->nHeight == 501)            // Official Bonus Rewards 
+        else if(pindexBest->nHeight >= 501 && pindexBest->nHeight < 1000)            // Official Bonus Rewards 
     {
-        nSubsidy = 1000 * COIN; // 1000                // 1000 LUX for the first block mined after instamine protection
+        nSubsidy = 4 * COIN; //                 // 1000 LUX for the first block mined after instamine protection
     }
-        else if(pindexBest->nHeight < 1000000)         // Second halving - Initilised normal blockchain
+        else if(pindexBest->nHeight == 1000)         // Third halving - Superblock rewards | Happy Birthday Lux 1 Year | 10/10/2018 | 30 LUX/block reward 
     {
-        nSubsidy = 10 * COIN;  // ~10m
+        nSubsidy = 2000 * COIN;  // 
     }
-        else if(pindexBest->nHeight < 1001000)         // Third halving - Superblock rewards | Happy Birthday Lux 1 Year | 10/10/2018 | 30 LUX/block reward 
+        else if(pindexBest->nHeight >= 1001 && pindexBest->nHeight<=9999)         // Last halving - Re-activate normal blockchain
     {
-        nSubsidy = 30 * COIN;  // ~30,000 reward to miner
+        nSubsidy = 4 * COIN;  // 
     }
-        else if(pindexBest->nHeight < 5000000)         // Last halving - Re-activate normal blockchain
+		else if(pindexBest->nHeight < 10000) // PoW end block 6m - Reduce block reward | Automatic initilised new blockchain after 6m blocks 
     {
-        nSubsidy = 10 * COIN;  // ~10m
+        nSubsidy = 4000 * COIN;  // 
     }
-		else if(pindexBest->nHeight < 6000000) // PoW end block 6m - Reduce block reward | Automatic initilised new blockchain after 6m blocks 
-    {
-        nSubsidy = 10 * COIN;  // ~10m
-    }
+	else if(pindexBest->nHeight >= 10001 && pindexBest->nHeight <= 99999)
+   {
+		nSubsidy = 4 * COIN;
+   }
+	else if (pindexBest->nHeight == 100000)
+	{
+		nSubsidy = 5000 * COIN;
+	}
         else
     {
-        nSubsidy = 1 * COIN; 
+        nSubsidy = 4 * COIN; 
     }
 
     LogPrint("creation", "GetProofOfWorkReward() : create=%s nSubsidy=%d nHeight=%d\n", FormatMoney(nSubsidy), nSubsidy, nHeight);
