@@ -101,7 +101,7 @@ public:
         pchMessageStart[2] = 0x84;
         pchMessageStart[3] = 0x3l;
         vAlertPubKey = ParseHex("042d13c016ed91528241bcff222989769417eb10cdb679228c91e26e26900eb9fd053cd9f16a9a2894ad5ebbd551be1a4bd23bd55023679be17f0bd3a16e6fbeba");
-        nDefaultPort = 28666;
+        nDefaultPort = 55555;
         bnProofOfWorkLimit = ~uint256(0) >> 20; // LUX starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 210000;
         nMaxReorganizationDepth = 100;
@@ -119,7 +119,7 @@ public:
         const char* pszTimestamp = "Lux - Implemented New PHI Algo PoW/PoS Hybird - Parallel Masternode - ThankYou - 216k155"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
-        txNew.nTime = 1507656633;
+        txNew.nTime = 1515717664;
         txNew.nLockTime = 0;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -130,9 +130,9 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1507656633; //10/10/2017
+        genesis.nTime = 1515717664; //10/10/2017
         genesis.nBits = 0x1e0fffff;
-        genesis.nNonce = 986946;
+        genesis.nNonce = 0;
 
         hashGenesisBlock = genesis.GetHash();
 
@@ -140,10 +140,7 @@ public:
         assert(genesis.hashMerkleRoot == uint256("0xe08ae0cfc35a1d70e6764f347fdc54355206adeb382446dd54c32cd0201000d3"));
 
         vSeeds.push_back(CDNSSeedData("sd1", "45.32.245.217"));
-        vSeeds.push_back(CDNSSeedData("sd2", "45.63.25.110"));
-        vSeeds.push_back(CDNSSeedData("sd3", "45.76.118.90"));
-        vSeeds.push_back(CDNSSeedData("sd4", "136.243.89.142"));        // Single node address
-
+        
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,48); // LUX Start letter L
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,48);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,155);
@@ -167,7 +164,7 @@ public:
         strSporkKey = "042d13c016ed91528241bcff222989769417eb10cdb679228c91e26e26900eb9fd053cd9f16a9a2894ad5ebbd551be1a4bd23bd55023679be17f0bd3a16e6fbeba";
       
         strObfuscationPoolDummyAddress = "LR4VL9Pu9spxdSnGUTM1QvLJgfh8hCzS1J";
-        nStartMasternodePayments = 1507656633; // 10/10/2017
+        nStartMasternodePayments = 1515717664; // 10/10/2017
     }
 
     const Checkpoints::CCheckpointData& Checkpoints() const
@@ -205,8 +202,8 @@ public:
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nBits  = 0x1e0fffff;
-        genesis.nTime = 1504344001;
-        genesis.nNonce = 1454059;
+        genesis.nTime = 1515717664;
+        genesis.nNonce = 0;
 
         hashGenesisBlock = genesis.GetHash();
 //        assert(hashGenesisBlock == uint256("0"));
@@ -270,12 +267,12 @@ public:
         nTargetTimespan = 24 * 60 * 60; // Lux: 1 day
         nTargetSpacing = 1 * 60;        // Lux: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
-        genesis.nTime = 1454124731;
+        genesis.nTime = 1515717664;
         genesis.nBits = 0x207fffff;
-        genesis.nNonce = 12345;
+        genesis.nNonce = 0;
 
         hashGenesisBlock = genesis.GetHash();
-        nDefaultPort = 51476;
+        nDefaultPort = 55554;
 //        assert(hashGenesisBlock == uint256("0"));
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
@@ -306,7 +303,7 @@ public:
     {
         networkID = CBaseChainParams::UNITTEST;
         strNetworkID = "unittest";
-        nDefaultPort = 51478;
+        nDefaultPort = 55555;
         vFixedSeeds.clear(); //! Unit test mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Unit test mode doesn't have any DNS seeds.
 
