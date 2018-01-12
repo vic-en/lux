@@ -68,14 +68,14 @@ public:
         std::vector<CTxOut> vout;
         vout.resize(1);
         vout[0].SetEmpty();
-        CTransaction txNew(1, 1507656633, vin, vout, 0); // epochtime 15:00:00 oct/10/2017
+        CTransaction txNew(1, 1515716030, vin, vout, 0); // epochtime 15:00:00 oct/10/2017
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1507656633; // epochtime 15:00:00 oct/10/2017
+        genesis.nTime    = 1515716030; // epochtime 15:00:00 oct/10/2017
         genesis.nBits    = 0x1e0fffff; // Generated nBits. Input right nBits to prevent nBits below minimum works error 
-        genesis.nNonce   = 986946; // Input nNonce 0
+        genesis.nNonce   = 0; // Input nNonce 0
 
         // Generate genesis hash should take a while as exploit protection active in main.cpp
         // Anti exploitation activated. Note: need to wait until the generation finished for the right genesis block generated. Otherwise none of them are valid
@@ -85,11 +85,8 @@ public:
         assert(hashGenesisBlock == uint256("0x00000759bb3da130d7c9aedae170da8335f5a0d01a9007e4c8d3ccd08ace6a42")); 
         assert(genesis.hashMerkleRoot == uint256("0xe08ae0cfc35a1d70e6764f347fdc54355206adeb382446dd54c32cd0201000d3"));
 
-        vSeeds.push_back(CDNSSeedData("sd1", "45.32.245.217"));
-        vSeeds.push_back(CDNSSeedData("sd2", "45.63.25.110"));
-        vSeeds.push_back(CDNSSeedData("sd3", "45.76.118.90"));
-        vSeeds.push_back(CDNSSeedData("sd4", "136.243.89.142"));
-        vSeeds.push_back(CDNSSeedData("sd5", "pool.luxcore.io"));
+        vSeeds.push_back(CDNSSeedData("sd1", "104.238.164.5"));
+        
         
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,48); // LUX Start letter L
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,48); 
@@ -132,14 +129,14 @@ public:
         pchMessageStart[3] = 0x21;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 16);
         vAlertPubKey = ParseHex("04cc24ab003c828cdd9cf4db2ebbde8e1cecb3bbfa8b3127fcb9dd9b84d44112080827ed7c49a648af9fe788ff42e316aee665879c553f099e55299d6b54edd7e0"); // input pubkey for later start
-        nDefaultPort = 18065;
-        nRPCPort = 9777;
+        nDefaultPort = 55555;
+        nRPCPort = 55554;
         strDataDir = "testnet";
 
         // Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nBits  = 0x1e0fffff; //504365055 Decimal Number
-        genesis.nTime    = 1504344001;
-        genesis.nNonce = 1454059; // nNonce testnet should be 0
+        genesis.nTime    = 1515716030;
+        genesis.nNonce = 0; // nNonce testnet should be 0
 
         //assert(hashGenesisBlock == uint256("0x")); // need to generate new genesis block for later start
 
